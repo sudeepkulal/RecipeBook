@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+
+# User Uploads
+media/image/*
+!media/image/.gitkeep
+
+# Logs
+logs/
+*.log
