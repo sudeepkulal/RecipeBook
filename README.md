@@ -102,4 +102,4 @@ Vite will compile the assets into a highly compressed production build inside `f
 ---
 
 ## 👨‍💻 Author & Contributions
-Designed & rebuilt with modern decoupled coding standards. Feel free to clone, edit, or submit PRs to enhance the community features!
+Designed with modern decoupled coding standards and premium aesthetics. Feel free to clone, edit, or submit PRs to enhance the community features!
