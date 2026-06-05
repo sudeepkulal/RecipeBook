@@ -1,4 +1,4 @@
-# 🍳 RecipeBook (MERN Stack SPA)
+# 🍳 RecipeBook 
 
 A premium, decoupled, modern recipe cataloging and cooking companion single page application (SPA) built using the **MERN** stack (**MongoDB**, **Express**, **React**, **Node.js**) and styled with **Tailwind CSS v4**.
 
