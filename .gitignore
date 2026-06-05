@@ -42,3 +42,14 @@ logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Django / RecipeBook-Django
+RecipeBook-Django/__pycache__/
+RecipeBook-Django/*.py[cod]
+RecipeBook-Django/db.sqlite3
+RecipeBook-Django/media/
+!RecipeBook-Django/media/.gitkeep
+RecipeBook-Django/staticfiles/
+RecipeBook-Django/.env
+RecipeBook-Django/.venv/
+RecipeBook-Django/*.log

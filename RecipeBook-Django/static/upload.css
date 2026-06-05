@@ -1,0 +1,361 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Header styles */
+header {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+nav a:hover::before {
+    left: 0;
+}
+
+nav a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Main content styles */
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+main:hover {
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+}
+
+#upload h2 {
+    color: #e74c3c;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 2.2rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+#upload h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: #e74c3c;
+}
+
+/* Form styles */
+#uploadForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: #e74c3c;
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+}
+
+/* Image upload styles */
+#imageSection {
+    margin-bottom: 1.5rem;
+}
+
+#imageUpload {
+    display: none;
+}
+
+#imageSection label {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#imageSection label::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+#imageSection label:hover::before {
+    left: 100%;
+}
+
+#imageSection label:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#imagePreviewContainer {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+#imagePreview {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#imagePreview:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* Ingredients and Instructions sections */
+#ingredientsSection,
+#instructionsSection {
+    margin-bottom: 1.5rem;
+}
+
+#ingredientList,
+#instructionList {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+#ingredientList li,
+#instructionList li {
+    background-color: #f9f9f9;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: fadeInSlide 0.5s forwards;
+}
+
+@keyframes fadeInSlide {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#ingredientList li:hover,
+#instructionList li:hover {
+    background-color: #e8e8e8;
+    transform: translateX(5px);
+}
+
+#ingredientList li button,
+#instructionList li button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#ingredientList li button:hover,
+#instructionList li button:hover {
+    background-color: #c0392b;
+    transform: scale(1.1);
+}
+
+/* Add ingredient/instruction button styles */
+#addIngredientButton,
+#addInstructionButton {
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#addIngredientButton::before,
+#addInstructionButton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+#addIngredientButton:hover::before,
+#addInstructionButton:hover::before {
+    left: 100%;
+}
+
+#addIngredientButton:hover,
+#addInstructionButton:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Submit button styles */
+button[type="submit"] {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover::before {
+    left: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: #c0392b;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    main {
+        padding: 1.5rem;
+    }
+
+    #upload h2 {
+        font-size: 2rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    #addIngredientButton,
+    #addInstructionButton,
+    button[type="submit"] {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        width: 100%;
+        text-align: center;
+    }
+
+    #upload h2 {
+        font-size: 1.8rem;
+    }
+}

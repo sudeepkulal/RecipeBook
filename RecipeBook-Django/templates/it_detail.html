@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ it.title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "item.css" %}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ it.title }}</h1>
+        <img src="/media/{{ it.image }}" style="width: 300px; height: 300px;">
+        {% comment %} <img src="css/1f2ed796410477e1a734a08a516a7c9e.jpg" alt="{{ item.title }}"> {% endcomment %}
+        <p><strong>Ingredients:</strong> {{ it.ingredients }}</p>
+        <p><strong>Instructions:</strong> {{ it.instructions }}</p>
+        <p><strong>Time:</strong> {{ it.time }}min</p>
+        <p><strong>Dish:</strong> {{ it.dish }}</p>
+        <a href="{% url 'index' %}" class="back-link">Back to list</a>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecipeBook</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "index.css" %}">
+    <style>
+        .hide{
+            display: none;
+        }
+        .categories{
+            {% comment %} background: linear-gradient(232deg, #da06f4 0%, #09ce44 100%); {% endcomment %}
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">RecipeBook</div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="/home">Profile</a></li>
+                    <li><a href="/add">Upload Recipe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section with Unified Search Bar -->
+    <main>
+        <section id="search" class="hero">
+            <div class="hero-text">
+                <h1>Find Your Recipe</h1>
+                <p>Search by name or ingredients using the dropdown below.</p>
+                <form method="post">
+                    {% csrf_token %}
+                <div class="search-bar">
+                    <select id="searchType" style="font-size:13px">
+                        <option value="name" >Search by Name</option>
+                        <option value="ingredients">Search by Ingredients</option>
+                        <option value="duration">Search by levels</option>
+                    </select>
+                    <input type="text" class="" id="searchInput" placeholder="gg I want to make..."  name="tit">
+                    <input type="text" class="hide" id="searchInputtwo" placeholder="I want to make..." name="ind" >
+                            <select name="difficulty" id="difficultyFilter" class="hide">
+                                <option value="">All</option>
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                        
+                        
+                    <div id="button"><button >Search</button></div>
+                </div>
+            </form>
+            </div>
+            
+        </section>
+        
+       
+        <div class="recommendation">
+        <!-- Filters Section -->
+        {% comment %} <section id="filters" class="categories">
+            <div class="search-bar"> {% endcomment %}
+                {% comment %} <label>
+                    Difficulty:
+                    <select id="difficultyFilter">
+                        <option value="">All</option>
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Hard">Hard</option>
+                    </select>
+                </label> {% endcomment %}
+
+
+
+{% comment %} 
+                <form method="post">
+                    {% csrf_token %}
+                    
+                </form>
+                 {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+                {% comment %} <label>
+                    Max Cooking Time (mins):
+                    <input type="number" id="timeFilter" min="0" placeholder="e.g., 30">
+                </label> {% endcomment %}
+                {% comment %} <label>
+                    Dietary Preferences:
+                    <select id="dietFilter">
+                        <option value="">All</option>
+                        <option value="Low Carb">Low Carb</option>
+                        <option value="High Protein">High Protein</option>
+                    </select>
+                </label> {% endcomment %}
+                {% comment %} <button onclick="applyFilters()">Apply Filters</button> {% endcomment %}
+            {% comment %} </div>
+        </section> {% endcomment %}
+         <!-- Recommended Recipes Section -->
+         <section id="recipes" class="categories">
+            <h2>Recipes</h2>
+            <div>
+
+            
+            
+            <p>Explore a variety of recipes crafted for you.</p>
+            <div id="recipeList" class="category-grid">
+                
+                {% for dish in dishes %}
+            {% comment %} <li>
+                <a href="{% url 'product_detail' product_id=dish.id %}" id="atag">
+                    {{ dish.title }}
+                </a>
+                <p>{{ dish.ingredients }}</p>
+            </li> {% endcomment %}
+
+            <div class="category">
+                    
+                    
+                    
+                <a href="{% url 'product_detail' product_id=dish.id %}" >
+                    <img src="/media/{{dish.image}}" class="category-image">
+                    
+                </a>
+                <h3>{{ dish.title }}</h3>
+            </div>
+            {% empty %}
+                        <p style="font-size:50px;font-weight:bold">No Dishes Found</p>
+        {% endfor %}
+                    
+
+
+
+
+              
+<div class="hide" id="adjust">
+                
+                {% for itm in itm %}
+
+
+                <div class="category" >
+                    
+                    
+                    
+                    <a href="{% url 'product_detail' product_id=itm.id %}" >
+                        <img src="{{itm.image}}" class="category-image">
+                    </a>
+                    <h3>{{ itm.title }}</h3>
+                </div>
+                {% empty %}
+                        <p>No comments yet. Be the first to comment!</p>
+                {% endfor %}
+            </div>
+        </div>
+            
+            
+        </section>
+        
+        <!-- Recipes Section -->
+        <section id="recipes" class="categories">
+            
+            <p>Explore a variety of recipes crafted for you.</p>
+            <div id="recipeList" class="category-grid">
+                <!-- Recipe items will be dynamically populated -->
+            </div>
+        </section>
+    </div>
+    </main>
+    
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-section">
+                <h3>About RecipeBook</h3>
+                <p>RecipeBook helps you discover and share delicious recipes from around the world.</p>
+                <ul>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li>Email: <a href="mailto:rcpibook@gmail.com">rcpibook@gmail.com</a></li>
+                    <li>Phone: 123-456-7890</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <ul class="social-links">
+                    <li><a href="https://facebook.com/recipebook" target="_blank">Facebook</a></li>
+                    <li><a href="https://twitter.com/recipebook" target="_blank">Twitter</a></li>
+                    <li><a href="https://instagram.com/recipebook" target="_blank">Instagram</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Feedback</h3>
+                <form action="/send-feedback/" method="post">
+                    {% csrf_token %}
+                    <input type="email" name="email" placeholder="Enter your email" value="rcpibook@gmail.com" class="hide" required>
+                    <input type="text" name="subject" class="hide" value="{{ request.user.username }}" required>
+                    <textarea name="message" placeholder="Enter your feedback" required></textarea>
+                    <button type="submit">Submit</button>
+                    {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+                </form>
+            </div>
+            
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 RecipeBook | All Rights Reserved</p>
+        </div>
+    </footer>
+    
+    
+    <script>
+        // Unified search function
+        const adjust = document.getElementById("adjust");
+        const button = document.getElementById("button");
+        document.getElementById("searchType").addEventListener("change", function () {
+            // Get the selected value
+            const selectedValue = this.value;
+            
+        
+            // Get the input fields
+            const inputByName = document.getElementById("searchInput");
+            const inputByIngredients = document.getElementById("searchInputtwo");
+            const difficulty = document.getElementById("difficultyFilter");
+        
+            // Reset both inputs to hidden by default
+            inputByName.classList.add("hide");
+            inputByIngredients.classList.add("hide");
+            difficulty.classList.add("hide");
+        
+            // Remove the hide class from the selected input
+            if (selectedValue === "name") {
+                inputByName.classList.remove("hide");
+            } else if (selectedValue === "ingredients") {
+                inputByIngredients.classList.remove("hide")
+            }
+            else if (selectedValue === "duration") {
+                difficulty.classList.remove("hide")
+            }
+        });
+
+        {% comment %} function performSearch(){ {% endcomment %}
+        button.addEventListener("click", function() {
+            console.log('log');
+            
+            adjust.classList.remove("hide");
+
+
+        });
+
+        
+
+        
+    </script>
+</body>
+</html>

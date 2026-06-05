@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Recipe Sharing Website</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        /* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* Header Styles */
+header {
+    background: #ff6f61;
+    color: #fff;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #333;
+}
+
+/* About Section Styles */
+.about-section {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-section h1 {
+    text-align: center;
+    color: #ff6f61;
+    margin-bottom: 1rem;
+}
+
+.about-section h2 {
+    color: #ff6f61;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.about-section p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+.about-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.about-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: #333;
+    color: #fff;
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav ul li {
+        margin: 10px 0;
+    }
+
+    .about-section {
+        padding: 1.5rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index'%}">Home</a></li>
+                {% comment %} <li><a href="recipes.html">Recipes</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li> {% endcomment %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <h1>About Us</h1>
+            <p>Welcome to our Recipe Sharing Website! Whether you're an avid chef or just starting out, our platform is designed to bring food enthusiasts together.</p>
+
+            <h2>What We Offer</h2>
+            <ul>
+                <li><b>Upload Recipes</b>: Share your cooking expertise with others by uploading your favorite recipes.</li>
+                <li><b>Search Recipes</b>: Explore a vast collection of recipes by searching based on the name of the dish.</li>
+                <li><b>Ingredient-Based Search</b>: Got specific ingredients at hand? Enter them, and we'll suggest recipes you can create!</li>
+                <li><b>Cooking Time Filters</b>: Find recipes based on their cooking time. Choose from easy, medium, or difficult dishes.</li>
+                <li><b>Rate and Comment</b>: Share your thoughts on recipes by leaving a rating and a comment.</li>
+            </ul>
+
+            <h2>Why Choose Us?</h2>
+            <p>We make cooking accessible and enjoyable for everyone by offering a platform to share and discover recipes. Whether you're looking for quick meal ideas, gourmet dishes, or inspiration for using leftover ingredients, we've got you covered!</p>
+
+            <h2>Join Our Community</h2>
+            <p>Start your cooking journey today by exploring, sharing, and connecting with other food lovers. Together, let's celebrate the joy of cooking!</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Recipe Sharing Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>

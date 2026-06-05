@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button, a {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .messages {
+            margin-top: 15px;
+            color: red;
+        }
+        a { 
+            text-decoration: none;
+            background-color: #2196F3;
+        }
+        a:hover {
+            background-color: #1976D2;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add Item</h2>
+        <section id="upload">
+        <form id="uploadForm" method="post">
+            {% csrf_token %}
+            {% comment %} <label for="name">Title:</label>
+            <input type="text" id="recipeName" name="name" placeholder="Enter your name" required> {% endcomment %}
+            <label for="name">Title:</label>
+            <input type="text" id="recipeName" name="title" required>
+
+            
+            <div id="ingredientsSection">
+                <label>Ingredients:</label>
+                <ul id="ingredientList"></ul>
+                <input type="text" id="newIngredient" placeholder="Add an ingredient" name="ingredients"/>
+                <button type="button" id="addIngredientButton">Add Ingredient</button>
+                <input type="hidden" id="ingredientsField" name="ingredients">
+            </div>
+            {% comment %} <input type="text" id="description" name="ingredients" required> {% endcomment %}
+            
+            <div id="instructionsSection">
+                <label>Instructions:</label>
+                <ul id="instructionList"></ul>
+                <input type="text" id="newInstruction" placeholder="Add an instruction" />
+                <button type="button" id="addInstructionButton">Add Instruction</button>
+                <input type="hidden" id="instructionsField" name="instructions">
+            </div>
+            
+            
+            {% comment %} <input type="text" id="price" name="instructions" required> {% endcomment %}
+            
+            
+    
+    <div id="timeRequiredSection">
+        <label for="minutes">Time Required (in minutes):</label>
+        <input type="number" id="minutes" placeholder="Minutes" min="1" name="time" required>
+    </div>
+
+
+
+            {% comment %} <input type="number" id="time" name="time" required> {% endcomment %}
+
+            <label for="price">Dish:</label>
+
+            <select id="dishType" name="dish" required>
+                <option value="" disabled selected>Type of Dish</option>
+                <option value="Sweet">Sweet</option>
+                <option value="Spicy">Spicy</option>
+                <option value="Sour">Sour</option>
+            </select>
+
+            {% comment %} <input type="text" id="dish" name="dish" required> {% endcomment %}
+            <button type="submit">Submit</button>
+        </form>
+        <p>or</p>
+        <a href="{% url 'home' %}">Cancel</a>
+        <div class="messages">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        <section id="upload">
+    </div>
+    
+    {% comment %} {% load static %}
+    <script src="{% static "upload.js" %}"></script> {% endcomment %}
+
+    {% load static %}
+    <script src="{% static "upload.js" %}"></script>
+</body>
+</html>

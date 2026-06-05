@@ -1,0 +1,105 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ item.title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "item.css" %}">
+    <style>
+        .comment {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #fed6e3 0%, #a8edea 100%);
+        }
+        .stars {
+            display: inline-flex;
+            font-size: 18px;
+        }
+    
+        .star {
+            color: #ccc; /* Unfilled star color */
+        }
+    
+        .star.filled {
+            color: #ffc107; /* Filled star color */
+        }
+        .container{
+            background: linear-gradient(135deg, #e3c4c4 0%, #178bc5 100%);
+        }
+        body{
+            background: linear-gradient(135deg, #e7b0eb 0%, #a3db9d 100%);
+        }
+        .back-link {
+            background-color: #b5d517;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ item.title }}</h1>
+        <img src="/media/{{ item.image }}" style="width: 300px; height: 300px;">
+        {% comment %} <img src="css/1f2ed796410477e1a734a08a516a7c9e.jpg" alt="{{ item.title }}"> {% endcomment %}
+        {% comment %} <p><strong>Ingredients:</strong> {{ item.ingredients }}</p> {% endcomment %}
+
+<p>
+        <strong>Ingredients:</strong>
+             
+        <ul>
+           {% for ingredients in item.ingredients %}
+               <li>{{ ingredients }}</li>
+           {% endfor %}
+       </ul>
+       </p>
+
+
+
+
+
+        <p><strong>Instructions:</strong> 
+            
+            <ul>
+                {% for instruction in item.instructions %}
+                    <li>{{ instruction }}</li>
+                {% endfor %}
+            </ul></p>
+
+
+{% comment %} 
+        <p><strong>Instructions:</strong> {{ item.instructions }}</p> {% endcomment %}
+        <p><strong>Time:</strong> {{ item.time }}min</p>
+        <p><strong>Dish:</strong> {{ item.dish }}</p>
+        <a href="{% url 'home' %}" class="back-link">Back to list</a>
+    </div>
+
+    {% for comment in comments %}
+    <div class="comment">
+        {% load static %}
+        <div style="display: flex;flex-wrap: wrap;">
+        <img src="{% static "p.jpg" %}" style="margin:0px;height:50px;width:50px;border-radius:100px;">&nbsp
+        <p><strong>{{ comment.user.username }}</strong></p></div>
+        <p>
+            Rating:
+            <span class="stars">
+                {% for i in "12345" %}
+                    {% if forloop.counter <= comment.rating %}
+                        <span class="star filled">★</span>
+                    {% else %}
+                        <span class="star">★</span>
+                    {% endif %}
+                {% endfor %}
+            </span>
+        </p>
+        <p>{{ comment.text }}</p>
+        <p><em>Posted on {{ comment.created_at|date:"F j, Y, g:i a" }}</em></p>
+    </div>
+    <hr>
+                    {% comment %} {% empty %}
+                        <p>No comments yet. Be the first to comment!</p> {% endcomment %}
+                    {% endfor %}
+</body>
+</html>

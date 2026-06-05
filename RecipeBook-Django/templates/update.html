@@ -1,0 +1,326 @@
+{% comment %} <!DOCTYPE html>
+<html>
+<head>
+    <title>Update Item</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 15%;
+            margin: 20px auto;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label, input, textarea {
+            margin-bottom: 10px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        button, a {
+            padding: 10px 20px;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        button {
+            background-color: #4CAF50;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            background-color: #2196F3;
+        }
+        a:hover {
+            background-color: #1976D2;
+        }
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Update Item</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="title" value="{{ item.title }}" required>
+            <label for="description">Description:</label>
+            <textarea id="description" name="ingredients">{{ item.ingredients }}</textarea>
+           
+            <label for="price">Price:</label>
+           
+            <textarea id="description" name="instructions">{{ item.instructions }}</textarea>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="time" value="{{ item.time }}" required>
+         
+
+            <div class="button-container">
+                <button type="submit">Update</button>
+                <a href="{% url 'home' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html> {% endcomment %}
+
+
+ {% comment %} <label for="price">Price:</label>
+            <input type="text" id="price" name="ingredients" value="{{ item.ingredients}}" required> {% endcomment %}
+
+             {% comment %} <input type="text" id="price" name="instructions" value="{{ item.instructions }}" required> {% endcomment %}
+
+
+                {% comment %} <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{ item.dish }}"> {% endcomment %}
+
+
+            {% comment %} <label for="name">Name:</label>
+
+            <select id="dishType" name="dish" required>
+                <option value="{{ item.time }}" disabled selected>{{ item.dish }}</option>
+                <option value="Sweet">Sweet</option>
+                <option value="Spicy">Spicy</option>
+                <option value="Sour">Sour</option>
+            </select> {% endcomment %}
+
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Upload Recipe - RecipeBook</title>
+                {% load static %}
+                <link rel="stylesheet" href="{% static "upload.css" %}">
+            </head>
+            <body>
+                <header>
+                    <h1>RecipeBook</h1>
+                    <nav>
+                        
+                    </nav>
+                </header>
+                <main>
+                    <section id="upload">
+                        <h2>Upload Recipe</h2>
+                        <form id="uploadForm" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <label for="recipeName">Recipe Name:</label>
+                            <input type="text" id="recipeName" name="title" placeholder="title" value="{{ item.title}}"  required>
+            
+                            <!-- Upload Image Section -->
+                            {% comment %} <div id="imageSection">
+                                <label for="imageUpload">Upload Image:</label>
+                                <input type="file" id="imageUpload" accept="image/*" name="image"/>
+                                <div id="imagePreviewContainer">
+                                    <img id="imagePreview" src="" alt="Image Preview" style="display:none; max-width: 100%; max-height: 300px;">
+                                </div>
+                            </div> {% endcomment %}
+            
+                            <!-- Ingredients Section -->
+<div id="ingredientsSection">
+    <label for="newIngredient">Ingredients:</label>
+    <input type="text" id="newIngredient" placeholder="Add an ingredient">
+    <ul id="ingredientList">
+        {% for ingredient in item.ingredients %}
+        <li>
+            {{ ingredient }}
+            <button type="button" class="removeButton">Remove</button>
+        </li>
+        {% endfor %}
+    </ul>
+    <button type="button" id="addIngredientButton">Add Ingredient</button>
+    <input type="hidden" id="ingredientsField" name="ingredients">
+</div>
+
+<!-- Instructions Section -->
+<div id="instructionsSection">
+    <label for="newInstruction">Instructions:</label>
+    <input type="text" id="newInstruction" placeholder="Add an instruction">
+    <ul id="instructionList">
+        {% for instruction in item.instructions %}
+        <li>
+            {{ instruction }}
+            <button type="button" class="removetButton">Remove</button>
+        </li>
+        {% endfor %}
+    </ul>
+    <button type="button" id="addInstructionButton">Add Instruction</button>
+    <input type="hidden" id="instructionsField" name="instructions">
+</div>
+
+            
+                            <!-- Time Required Section (Minutes Only) -->
+                            <div id="timeRequiredSection">
+                                <label for="minutes">Time Required (in minutes):</label>
+                                <input type="number" id="minutes" placeholder="Minutes" min="1" name="time" required value="{{ item.time }}">
+                            </div>
+            
+                            <!-- Dish Type Section -->
+                            {% comment %} <div id="dishTypeSection">
+                                <label for="dishType">Type of Dish:</label>
+                                <select id="dishType" name="dish" required>
+                                    <option value="" disabled selected>Type of Dish</option>
+                                    <option value="Sweet">Sweet</option>
+                                    <option value="Spicy">Spicy</option>
+                                    <option value="Sour">Sour</option>
+                                </select>
+                            </div> {% endcomment %}
+                            <div id="final"> 
+            
+                            <button type="submit">Update</button>
+                            <div>
+                        </form>
+                    </section>
+                </main>
+                <div class="messages">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                <footer>
+                    <p>&copy; 2024 RecipeBook</p>
+                </footer>
+               
+                <script>
+                    // Image Upload Preview
+
+
+// Ingredient management
+const ingredientList = document.getElementById("ingredientList");
+const newIngredientInput = document.getElementById("newIngredient");
+const addIngredientButton = document.getElementById("addIngredientButton");
+const removeButtons = document.querySelectorAll(".removeButton");
+
+for (let i = 0; i < removeButtons.length; i++) {
+    removeButtons[i].addEventListener("click", function () {
+        // Assuming listItem refers to the parent element of the button
+        const listItem = this.parentElement; 
+        ingredientList.removeChild(listItem);
+    });
+}
+
+const removeButtonS = document.querySelectorAll(".removetButton");
+
+for (let i = 0; i < removeButtonS.length; i++) {
+    removeButtonS[i].addEventListener("click", function () {
+        // Assuming listItem refers to the parent element of the button
+        const listItem = this.parentElement; 
+        instructionList.removeChild(listItem);
+    });
+}
+
+
+// Add new ingredient to the list
+addIngredientButton.addEventListener("click", function () {
+    const ingredient = newIngredientInput.value.trim();
+
+    if (ingredient) {
+        const listItem = document.createElement("li");
+        listItem.textContent = ingredient;
+
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        removeButton.addEventListener("click", function () {
+            ingredientList.removeChild(listItem);
+        });
+
+        listItem.appendChild(removeButton);
+        ingredientList.appendChild(listItem);
+
+        newIngredientInput.value = "";
+    } else {
+        alert("Please enter a valid ingredient.");
+    }
+
+
+});
+
+// Instruction management
+const instructionList = document.getElementById("instructionList");
+const newInstructionInput = document.getElementById("newInstruction");
+const addInstructionButton = document.getElementById("addInstructionButton");
+
+// Add new instruction to the list
+addInstructionButton.addEventListener("click", function () {
+    const instruction = newInstructionInput.value.trim();
+
+    if (instruction) {
+        const listItem = document.createElement("li");
+        listItem.textContent = instruction;
+
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        removeButton.addEventListener("click", function () {
+            instructionList.removeChild(listItem);
+        });
+
+        listItem.appendChild(removeButton);
+        instructionList.appendChild(listItem);
+
+        newInstructionInput.value = "";
+    } else {
+        alert("Please enter a valid instruction.");
+    }
+});
+
+const final=document.getElementById("final");
+final.addEventListener("click", function () {
+// Handle form submission
+// document.getElementById("uploadForm").addEventListener("submit", function (event) {
+//     event.preventDefault();
+
+    const recipeName = document.getElementById("recipeName").value.trim();
+    const ingredients = Array.from(ingredientList.children).map((li) =>
+        li.firstChild.textContent
+    );
+    const instructions = Array.from(instructionList.children).map((li) =>
+        li.firstChild.textContent
+    );
+    
+    const minutes = document.getElementById("minutes").value.trim();
+
+    const hing = document.getElementById("ingredientsField");
+    const hins = document.getElementById("instructionsField");
+
+    hing.value=ingredients;
+    hins.value=instructions;
+
+
+    // Validate all fields
+    if (minutes && recipeName && ingredients.length > 0 && instructions.length > 0 ) {
+        let totalTime = `${minutes} minutes`;
+
+        alert(`Recipe "${recipeName}" uploaded successfully!\nTime Required: ${totalTime}\ningreed: ${ingredients}\ninstruc: ${instructions}`);
+    } else {
+        alert("Please fill out all fields correctly.");
+    }
+});
+
+                </script>
+            
+            </body>
+            </html>
+            

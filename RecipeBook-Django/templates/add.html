@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Recipe - RecipeBook</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "upload.css" %}">
+</head>
+<body>
+    <header>
+        <h1>RecipeBook</h1>
+        <nav>
+            
+        </nav>
+    </header>
+    <main>
+        <section id="upload">
+            <h2>Upload Recipe</h2>
+            <form id="uploadForm" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="recipeName">Recipe Name:</label>
+                <input type="text" id="recipeName" name="title" placeholder="title" required>
+
+                <!-- Upload Image Section -->
+                <div id="imageSection">
+                    <label for="imageUpload">Upload Image:</label>
+                    <input type="file" id="imageUpload" accept="image/*" name="image"/>
+                    <div id="imagePreviewContainer">
+                        <img id="imagePreview" src="" alt="Image Preview" style="display:none; max-width: 100%; max-height: 300px;">
+                    </div>
+                </div>
+
+                <!-- Ingredients Section -->
+                <div id="ingredientsSection">
+                    <label for="newIngredient">Ingredients:</label>
+                    <ul id="ingredientList"></ul>
+                    <input type="text" id="newIngredient" placeholder="Do not use commas" name="ingredients"/>
+                    <button type="button" id="addIngredientButton">Add Ingredient</button>
+                    <input type="hidden" id="ingredientsField" name="ingredients">
+                </div>
+
+                <!-- Instructions Section -->
+                <div id="instructionsSection">
+                    <label for="newInstruction">Instructions:</label>
+                    <ul id="instructionList"></ul>
+                    <input type="text" id="newInstruction" placeholder="Do not use commas" name="instructions" />
+                    <button type="button" id="addInstructionButton">Add Instruction</button>
+                    <input type="hidden" id="instructionsField" name="instructions">
+                </div>
+
+                <!-- Time Required Section (Minutes Only) -->
+                <div id="timeRequiredSection">
+                    <label for="minutes">Time Required (in minutes):</label>
+                    <input type="number" id="minutes" placeholder="Minutes" min="1" name="time" required>
+                </div>
+
+                <!-- Dish Type Section -->
+                <div id="dishTypeSection">
+                    <label for="dishType">Type of Dish:</label>
+                    <select id="dishType" name="dish" required>
+                        <option value="" disabled selected>Type of Dish</option>
+                        <option value="Sweet">Sweet</option>
+                        <option value="Spicy">Spicy</option>
+                        <option value="Sour">Sour</option>
+                    </select>
+                </div>
+                <div id="final"> 
+
+                <button type="submit">Add</button>
+                <div>
+            </form>
+        </section>
+    </main>
+    <div class="messages">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    <footer>
+        <p>&copy; 2024 RecipeBook</p>
+    </footer>
+    {% load static %}
+    <script src="{% static "upload.js" %}"></script>
+
+</body>
+</html>

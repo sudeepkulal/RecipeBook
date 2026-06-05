@@ -1,0 +1,275 @@
+{% comment %} from view.py {% endcomment %}
+
+from django.shortcuts import render, HttpResponse
+
+#Create your views here.
+def index(request):
+    return render(request, 'index.html')
+
+    from django.contrib.auth.decorators import login_required
+    def home(request):
+    return render(request, "home.html")
+
+
+
+    def upload_recipe(request):
+    if request.method == "POST":
+        title = request.POST.get('title')
+        image = request.POST.get('image')
+        ingredients = request.POST.get('ingredients')
+        instructions = request.POST.get('instructions')
+        time = request.POST.get('time')
+        dish = request.POST.get('dish')
+        rs=RecipeSet(user=request.user, title=title, image=image, ingredients=ingredients, instructions=instructions, time=time, dish=dish)
+        rs.save()
+
+    return render(request,"upload_recipe.html")
+
+
+    image = request.FILES.get('image')  # Handle file upload
+
+    if Item.objects.filter(title=title).exists():
+            messages.error(request, "Item already exists")
+        else:
+
+        image="/media/"+str(image)
+
+
+
+
+
+
+        def new(request):
+        return render(request, "new.html")
+    
+    def new(request):
+        it = Item.objects.all()
+        for i in it:
+            i.image="/media/"+str(i.image)
+        return render(request, "new.html", {"its": it})
+    
+    def new(request):
+        # Filter items by dish type, e.g., "sour"
+        sour_dishes = Item.objects.filter(dish="Sour")
+        for i in sour_dishes:
+            i.image = "/media/" + str(i.image)
+        return render(request, "new.html", {"its": sour_dishes})
+
+
+        dis.classList.remove("stop");
+
+
+        alert(Searching for recipes by name: ${query});
+        alert(Searching for recipes with ingredients: ${query});
+
+
+
+
+
+
+
+        def it_detail(request, it_id):
+        it = get_object_or_404(Item, id=it_id)
+        # image="/media/"+str(image)
+        return render(request, 'it_detail.html', {'it': it})
+
+        
+
+
+
+
+
+        product_detail.html
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.title }}</title>
+</head>
+<body>
+    <h1>{{ product.title }}</h1>
+    <img src="{{ product.image }}" alt="{{ product.title }}">
+    <p>{{ product.dish }}</p>
+</body>
+</html>
+
+<img src="css/1f2ed796410477e1a734a08a516a7c9e.jpg" alt="{{ item.title }}">
+
+{{ product.ingredients }}
+
+{{ product.instructions }}
+
+add.html
+<a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+
+
+new.html
+
+<form method="POST" action="{% url 'new' %}">
+    {% csrf_token %}
+    
+    <select id="dish" name="dish" required>
+        <option value="" disabled selected>What you like?</option>
+        <option value="Sweet">Sweet</option>
+        <option value="Spicy">Spicy</option>
+        <option value="Sour">Sour</option>
+    </select>
+    
+    <button type="submit">Search</button>
+</form>
+
+
+{% for it in its %}
+                <div class="category">
+                    
+                    
+                    <a href="{% url 'product_detail' product_id=it.id %}">
+                        <img src="{{it.image}}" class="category-image">
+                    </a>
+                    <h3>{{ it.title }}</h3>
+                   
+
+
+
+
+                     <p><strong>Instructions:</strong> 
+                        {{ product.instructions }}
+                        <ul>
+                            {% for instruction in it.instructions %}
+                                <li>{{ instruction }}</li>
+                            {% endfor %}
+                        </ul></p>
+
+
+
+                        <h3>{{ it.created_by.username }}</h3>
+
+                    </div>
+
+
+
+                    <tr>
+                        <td>{{ item.title }}</td>
+                        <td><a href="{% url 'item_detail' item.id %}" style="color:black">{{ item.title }}</a></td>
+                        <td>{{ item.dish}}</td>
+                        <td><img src="{{item.image}}" style="width: 100px; height: 100px;"></td>
+                    </tr>
+
+
+
+                {% endfor %}
+
+
+                <a href="{% url 'product_detail' product_id=it.id %}">
+
+
+
+
+
+
+                index.html
+                <div class="category">
+                    {% load static %}
+                    <img src="{% static "pizza.jpg" %}" alt="Pizza" class="category-image">
+                    <h3>Pizza</h3>
+                </div>
+                <div class="category">
+                    {% load static %}
+                    <img src="{% static "sushi.jpg" %}" alt="Sushi" class="category-image">
+                    <h3>Sushi</h3>
+                </div>
+                <div class="category">
+                    {% load static %}
+                    <img src="{% static "biryani.jpg" %}" alt="Biriyani" class="category-image">
+                    <h3>Biriyani</h3>
+                </div>
+
+
+
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td><a href="{% url 'item_detail' item.id %}" style="color:black">{{ item.title }}</a></td>
+                    <td>{{ item.dish}}</td>
+                    <td><img src="{{item.image}}" style="width: 100px; height: 100px;"></td>
+                </tr>
+
+
+                home.html
+                <a href="{% url 'edit' %}" class="edit-button">Edit</a>
+
+
+                <td>{{ item.title }}</td>
+
+                urls.py of RB
+                from django.contrib import admin
+from django.urls import path, include
+from RB import views
+
+urlpatterns = [
+    path("",views.index,name='home'),
+    
+]
+
+
+path('it/<int:it_id>/', views.it_detail, name='item_detail'),
+
+
+
+const st = document.getElementById('searchType');
+
+function performSearch(){
+    const searchType = document.getElementById('searchType').value;
+    const query = document.getElementById('searchInput')
+    
+    const ind = document.getElementById('searchInputtwo')
+    
+
+    if (!query) {
+        alert('Please enter a search query.');
+        return;
+    }
+
+    if (searchType === 'name') {
+       
+        query.classList.remove("hide");
+        // Add search by name logic here
+    } else if (searchType === 'ingredients') {
+       
+        // Add search by ingredients logic here
+    }
+}
+
+st.addEventListener("select", ()=> {
+    console("OOKkkk");
+
+})
+
+
+
+
+if request.method == "POST":
+        dish_type = request.POST.get("dish", "Sour")
+    else:
+        dish_type = "NULL"  # Default to "Sour" if not provided
+    filtered_dishes = Item.objects.filter(dish=dish_type).select_related('created_by')
+    for i in filtered_dishes:
+        i.image = "/media/" + str(i.image)
+        i.instructions = i.instructions.split(",")
+
+
+
+        if request.method == "POST":
+        dish_type = request.POST.get("dish", "Sour")
+    else:
+        dish_type = "NULL"  # Default to "Sour" if not provided
+    filtered_dishes = Item.objects.filter(dish=dish_type).select_related('created_by')
+    for i in filtered_dishes:
+        i.image = "/media/" + str(i.image)
+        i.instructions = i.instructions.split(",")
+
+
+
+
+        "its": filtered_dishes, "dish_type": dish_type,

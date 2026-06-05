@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            margin: 20px auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+        .header-left h2, .header-left p {
+            margin: 0;
+            margin-right: 20px;
+        }
+        .header-right {
+            display: flex;
+            gap: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .edit-button {
+            background-color: #2196F3;
+        }
+        .edit-button:hover {
+            background-color: #1976D2;
+        }
+        .logout-button {
+            background-color: #4CAF50;
+        }
+        .logout-button:hover {
+            background-color: #45a049;
+        }
+        .ubutton {
+            background-color:rgb(13, 154, 215);
+            color:rgb(49, 63, 5);
+            font-size:20px
+        }
+        .ubutton:hover {
+            background-color: #45a049;
+        }
+        .dbutton {
+            background-color:rgb(208, 242, 13);
+            color:rgb(49, 63, 5);
+            font-size:20px
+        }
+        .dbutton:hover {
+            background-color:rgb(227, 7, 7);
+        }
+        .create-button {
+            background-color: #f39c12;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .create-button:hover {
+            background-color: #e67e22;
+        }
+        .hide{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <h2>Home</h2>
+                <p>Welcome, {{ request.user.username }}!</p>
+            </div>
+            <div class="header-right">
+                <button class="edit-button  show">Edit</button>
+                <a href="{% url 'index' %}" class="logout-button">Logout</a>
+            </div>
+           
+        </div>
+        
+        <h3>List of Uploaded Recipes</h3>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Recipe Name</th>
+                    <th>Dish type</th>
+                    <th>Image</th>
+                    <th class="b hide">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        
+                        <td><a href="{% url 'item_detail' item.id %}" style="color:black">{{ item.title }}</a></td>
+                        <td>{{ item.dish}}</td>
+                        <td><img src="{{item.image}}" style="width: 100px; height: 100px;"></td>
+                        <td class="b hide"> <a href="{% url 'update_item' item.id  %}"><button class="ubutton">Update</button></a> &nbsp&nbsp<a href="{% url 'delete' item.id  %}"><button class="dbutton">Delete</button></a></td>
+                    </tr>
+                    
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'add' %}" class="create-button">Add Item</a><br>
+        <a href="{% url 'new' %}" class="create-button">Back To Home</a>
+    </div>
+    <script>
+        const hide =document.querySelector(".hide")
+        const finn = document.querySelectorAll(".b");
+        const start = document.querySelector(".show")
+        start.addEventListener("click",()=> {
+            finn.forEach((element) => {
+                element.classList.remove("hide");
+            });
+
+        });
+    </script>
+</body>
+</html>
